@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Travel Details</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #c6ffdd, #fbd786, #f7797d);
+        }
+
+        .header {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            text-shadow: 2px 2px 8px black;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .back {
+            margin-top: 30px;
+            display: inline-block;
+            background: #333;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header" id="headerTitle"></div>
+
+<div class="content">
+    <h2>Places to Visit</h2>
+    <div class="cards" id="cards"></div>
+
+    <a href="places.html" class="back">← Back to Places</a>
+</div>
+
+<script>
+    const place = new URLSearchParams(window.location.search).get("place");
+
+    const data = {
+        ooty: {
+            name: "Ooty",
+            image: "https://t3.ftcdn.net/jpg/04/10/13/22/360_F_410132299_FcexXOF2dC0j73CGr4lm9jY9oNhNEpsK.jpg",
+            places: ["Botanical Garden", "Ooty Lake", "Doddabetta Peak", "Tea Gardens"]
+        },
+        kodaikanal: {
+            name: "Kodaikanal",
+            image: "https://images.moneycontrol.com/static-mcnews/2025/09/20250919101010_7.jpg",
+            places: ["Kodaikanal Lake", "Coaker's Walk", "Pillar Rocks", "Bryant Park"]
+        },
+        chennai: {
+            name: "Chennai",
+            image: "https://c8.alamy.com/comp/CT740C/chennai-doodles-vector-illustration-CT740C.jpg",
+            places: ["Marina Beach", "Kapaleeshwarar Temple", "Fort St. George", "Elliot's Beach"]
+        },
+        madurai: {
+            name: "Madurai",
+            image: "https://media.assettype.com/outlooktraveller%2F2025-01-09%2Fssdg931q%2Fshutterstock2482038465.jpg?w=640&auto=format%2Ccompress",
+            places: ["Meenakshi Amman Temple", "Thirumalai Nayakkar Palace", "Gandhi Museum"]
+        },
+        rameswaram: {
+            name: "Rameswaram",
+            image: "https://s7ap1.scene7.com/is/image/incredibleindia/last-land-of-india-2-rameswaram-tamilnadu-hero-1?qlt=82&ts=1727162194133",
+            places: ["Ramanathaswamy Temple", "Agni Theertham", "Pamban Bridge"]
+        },
+        yercaud: {
+            name: "Yercaud",
+            image: "https://s3.india.com/wp-content/uploads/2024/11/Fascinating-Facts-in-Yercaud.jpg",
+            places: ["Yercaud Lake", "Lady's Seat", "Pagoda Point", "Botanical Garden"]
+        }
+    };
+
+    const info = data[place];
+
+    document.getElementById("headerTitle").style.backgroundImage =
+        `url('${info.image}')`;
+    document.getElementById("headerTitle").innerText = info.name;
+
+    const cardsDiv = document.getElementById("cards");
+    info.places.forEach(p => {
+        const div = document.createElement("div");
+        div.className = "card";
+        div.innerText = p;
+        cardsDiv.appendChild(div);
+    });
+</script>
+
+</body>
+</html>
